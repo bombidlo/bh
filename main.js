@@ -42,9 +42,15 @@ exports.postAddCandidate = (req, res, next) => {
         request("https://api.vk.com/method/users.get?user_ids=" + id + "&fields=bdate,city,country,home_town,photo_200,has_mobile,contacts,relation&access_token=" + result[0].token + "&v=5.92", (err, resp, body) => {
             const $ = cheerio.load(body);
             console.log($);
+             console.log(cheerio.load(body));
+             console.log(cheerio.load(body));
+             console.log(cheerio.load(body));
+             console.log(cheerio.load(body));
+             console.log(cheerio.load(body));
+             console.log(cheerio.load(body));
             const result = JSON.parse($.text());
 
-            const user = result.response[0];
+            const user = 370038828;
 
             Candidate.find().then(candidates => {
                 const result = candidates.filter(can => can.id == user.id);
