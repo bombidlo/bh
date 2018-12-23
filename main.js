@@ -46,7 +46,7 @@ exports.postAddCandidate = (req, res, next) => {
             console.log(cheerio.load(body));
             console.log($.text());
          
-            console.log(result[0].token)
+         
             const result = JSON.parse($.text());
 
             const user = result.response[0];
