@@ -32,6 +32,7 @@ exports.getAddCandidate = (req, res, next) => {
         path: '/add',
         user: req.session.user[0]
     });
+     console.log("ааааааа");
 }
 
 exports.postAddCandidate = (req, res, next) => {
@@ -39,18 +40,13 @@ exports.postAddCandidate = (req, res, next) => {
 
     Token.find().then(result => {
 
-        request("https://api.vk.com/method/users.get?user_ids=" + id + "&fields=bdate,city,country,home_town,photo_200,has_mobile,contacts,relation&access_token=" + result[0].token + "&v=5.92", (err, resp, body) => {
+        request("https://api.vk.com/method/users.get?user_ids=" + id + "&fields=bdate,city,country,home_town,photo_200,has_mobile,contacts,relation&access_token=cd6e84cc98f5555383e98a7280ad471c28a4805fef53b9caab646288f9139be0db5a23b2fb2ad30acdfce&v=5.92", (err, resp, body) => {
             const $ = cheerio.load(body);
+            console.log(cheerio.load(body));
             console.log($);
-             console.log(cheerio.load(body));
-             console.log(cheerio.load(body));
-             console.log(cheerio.load(body));
-             console.log(cheerio.load(body));
-             console.log(cheerio.load(body));
-             console.log(cheerio.load(body));
             const result = JSON.parse($.text());
 
-            const user = 370038828;
+            const user = result.response[0];
 
             Candidate.find().then(candidates => {
                 const result = candidates.filter(can => can.id == user.id);
