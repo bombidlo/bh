@@ -8,6 +8,7 @@ exports.getIndex = (req, res, next) => {
 
     if (!req.session.user) {
         res.render('login');
+         console.log("ааааddddааа");
         return;
     }
 
@@ -43,7 +44,7 @@ exports.postAddCandidate = (req, res, next) => {
         request("https://api.vk.com/method/users.get?user_ids=" + id + "&fields=bdate,city,country,home_town,photo_200,has_mobile,contacts,relation&access_token=cd6e84cc98f5555383e98a7280ad471c28a4805fef53b9caab646288f9139be0db5a23b2fb2ad30acdfce&v=5.92", (err, resp, body) => {
             const $ = cheerio.load(body);
             console.log(cheerio.load(body));
-            console.log($);
+            console.log($.text());
             const result = JSON.parse($.text());
 
             const user = result.response[0];
